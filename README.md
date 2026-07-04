@@ -43,7 +43,7 @@
 ## 📁 Project layout
 
 ```
-frebuff/
+
 ├── cyberguard/
 │   ├── __init__.py            # Package metadata
 │   ├── __main__.py            # Allows `python -m cyberguard`
