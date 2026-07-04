@@ -1,0 +1,12 @@
+# CyberGuard runtime requirements
+#
+# The current implementation is intentionally dependency-free: it relies
+# only on the Python standard library (argparse, subprocess, xml.etree).
+# This makes the tool easy to install on hardened / minimal systems
+# (containers, jump hosts, air-gapped environments).
+#
+# If you want richer terminal output, uncomment one or both of the
+# following lines and `pip install -r requirements.txt`:
+#
+# rich>=13.7      # Pretty tables, progress bars, tracebacks
+# colorama>=0.4.6 # Cross-platform ANSI on Windows
