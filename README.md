@@ -7,6 +7,13 @@
 [![python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org)
 [![license](https://img.shields.io/badge/license-MIT-green)](#license)
 [![deps](https://img.shields.io/badge/runtime%20deps-zero-brightgreen)](#dependencies)
+[![tests](https://img.shields.io/badge/tests-unittest-9cf)](#tests)
+
+Built and maintained by [knklinux](https://github.com/knklinux) as part of
+his security learning journey — the same journey behind
+**[Aion Sincro](https://github.com/knklinux/aion-sincro)**, an open-source
+AI assistant for pentesting and red-team training. CyberGuard is the
+"hands-on" toolkit; Aion Sincro is the AI companion that helps you master it.
 
 ---
 
@@ -29,7 +36,8 @@
 - Exit codes are CI/CD-friendly: `0` clean, `1` vulnerable, `2` partial error.
 
 ### 3. Architecture highlights
-- **Zero runtime dependencies** — runs on a stock Python 3.9+ install.
+- **Zero runtime dependencies** — runs on a stock Python 3.9+ install
+  (ideal for containers, jump hosts and air-gapped environments).
 - Modular package layout (`offensive.py`, `defensive.py`, `utils.py`),
   designed so additional modules (web, wireless, reporting, …) can be
   plugged in next to the existing two.
@@ -43,7 +51,6 @@
 ## 📁 Project layout
 
 ```
-
 ├── cyberguard/
 │   ├── __init__.py            # Package metadata
 │   ├── __main__.py            # Allows `python -m cyberguard`
@@ -54,8 +61,10 @@
 │   └── utils.py               # Colours, subprocess helpers, XML parsing
 ├── main.py                    # Convenience shim → `python main.py …`
 ├── requirements.txt           # Intentionally empty (zero deps)
-├── README.md                  # ← you are here
-└── .gitignore
+├── tests/
+│   ├── __init__.py
+│   └── test_smoke.py          # unittest smoke tests (no root/nmap needed)
+└── README.md                  # ← you are here
 ```
 
 ---
@@ -64,8 +73,8 @@
 
 ```bash
 # 1. Clone
-git clone https://github.com/<your-org>/cyberguard.git
-cd cyberguard
+git clone https://github.com/knklinux/ciberguard.git
+cd ciberguard
 
 # 2. (Optional but recommended) create and activate a virtualenv
 python3 -m venv .venv
@@ -166,6 +175,27 @@ enough evidence.
 
 ---
 
+## 🧪 Tests
+
+The suite exercises every parser and orchestrator **without** needing
+nmap, searchsploit or root access:
+
+```bash
+python -m unittest tests.test_smoke -v
+```
+
+Covered behavior includes:
+
+- `parse_nmap_xml` — open services + NSE script hits, closed/garbage ports dropped.
+- `parse_searchsploit_json` — modern JSON shape, legacy table fallback, garbage handling.
+- `SearchsploitSearcher` — `--format json` invocation and legacy fallback.
+- `SSHAuditor` — first-match-wins parsing, `Match` block truncation, unsafe-directive flags.
+- `run_offensive` — `enable_searchsploit=False` never invokes the searcher.
+- `run_defensive` — clean host yields exit code 0.
+- CLI entry points — `--help` for root and both sub-commands.
+
+---
+
 ## 🧩 Extending CyberGuard
 
 Add a new module by following the same shape as `offensive.py` /
@@ -184,7 +214,8 @@ Add a new module by following the same shape as `offensive.py` /
 CyberGuard ships with powerful offensive-assistance primitives. You are
 **solely responsible** for ensuring you have explicit, written
 authorization before scanning any system that is not your own. The
-authors disclaim all liability for misuse.
+authors disclaim all liability for misuse. Aion Sincro enforces the same
+rule: practice only on your own lab or with permission.
 
 ---
 
