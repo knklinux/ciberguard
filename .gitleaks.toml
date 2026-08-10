@@ -15,11 +15,13 @@ useDefault = true
 
 [allowlist]
 description = "Ejemplos de documentación, placeholders y fixtures de test"
-# Directorios de ejemplos/fixtures y archivos *.example
+# Directorios de ejemplos/fixtures, archivos *.example y archivos de test
+# (los tests suelen contener credenciales ficticias a propósito).
 paths = [
   '''(^|/)examples?/''',
   '''(^|/)fixtures/''',
   '''(^|/)test[-_]?fixtures?/''',
+  '''(^|/)test[_-]?[^/]*\.(js|mjs|cjs|ts)$''',
   '''\.example$''',
   # Contenido ficticio del simulador: los casos del juego contienen
   # credenciales falsas a propósito (evidencias de un entorno educativo).
