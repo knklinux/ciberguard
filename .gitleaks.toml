@@ -1,0 +1,37 @@
+# ============================================================
+# .gitleaks.toml — configuración compartida de Gitleaks
+# Reduce falsos positivos: ejemplos de documentación, placeholders
+# y fixtures de test que NO son secretos reales.
+#
+# Lo usan automáticamente el hook pre-commit y el CI (se detecta
+# en la raíz del repo). Si encuentras un falso positivo nuevo,
+# añádelo aquí en lugar de desactivar Gitleaks.
+# ============================================================
+title = "knklinux — Gitleaks (compartido)"
+
+# Extiende las reglas por defecto de Gitleaks (no las redefine)
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ejemplos de documentación, placeholders y fixtures de test"
+# Directorios de ejemplos/fixtures y archivos *.example
+paths = [
+  '''(^|/)examples?/''',
+  '''(^|/)fixtures/''',
+  '''(^|/)test[-_]?fixtures?/''',
+  '''\.example$''',
+  # Contenido ficticio del simulador: los casos del juego contienen
+  # credenciales falsas a propósito (evidencias de un entorno educativo).
+  '''(^|/)js/(rt-)?casos/''',
+]
+# Valores placeholder típicos de documentación y ejemplos conocidos
+regexes = [
+  '''(?i)example''',
+  '''AKIAIOSFODNN7EXAMPLE''',
+  '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY''',
+  '''(?i)your[_-]?(api[_-]?key|token|secret|password|client[_-]?id|access[_-]?key)''',
+  '''(?i)<[^>\n]{0,40}(key|token|secret|password|api)[^>\n]{0,40}>''',
+  '''^changeme$''',
+  '''^xxxx+$''',
+]
