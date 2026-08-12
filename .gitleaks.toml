@@ -21,7 +21,7 @@ paths = [
   '''(^|/)examples?/''',
   '''(^|/)fixtures/''',
   '''(^|/)test[-_]?fixtures?/''',
-  '''(^|/)test[_-]?[^/]*\.(js|mjs|cjs|ts)$''',
+  '''(^|/)test[_-]?[^/]*\.(js|mjs|cjs|ts|py)$''',
   '''\.example$''',
   # Contenido ficticio del simulador: los casos del juego contienen
   # credenciales falsas a propósito (evidencias de un entorno educativo).
